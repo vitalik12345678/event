@@ -1,0 +1,1 @@
+CREATE TYPE event_enum AS ENUM ('conference', 'workshop', 'seminar', 'other', 'party');
