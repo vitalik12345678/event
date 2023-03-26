@@ -1,8 +1,9 @@
-CREATE TABLE comments (
-comment_id BIGINT PRIMARY KEY,
-message VARCHAR(1000),
+CREATE TABLE IF NOT EXiSTS comments (
+comment_id SERIAL PRIMARY KEY,
+message TEXT(1000),
+parent_comment_id BIGINT,
 created_by BIGINT,
-created_at TIMESTAMP,
-updated_at TIMESTAMP,
-deleted_at TIMESTAMP
+created_at TIMESTAMP(0) DEFAULT NOW(),
+updated_at TIMESTAMP(0) DEFAULT NOW(),
+deleted_at TIMESTAMP(0) DEFAULT NOW()
 );
