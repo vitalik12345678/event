@@ -1,8 +1,8 @@
-CREATE TABLE IF NOT EXiSTS comments (
+CREATE TABLE IF NOT EXiSTS comment (
 comment_id SERIAL PRIMARY KEY,
 message TEXT,
 post_id BIGINT REFERENCES post(post_id),
-parent_comment_id BIGINT REFERENCES comments(comment_id),
+parent_comment_id BIGINT REFERENCES comment(comment_id),
 created_by BIGINT REFERENCES users(user_id),
 created_at TIMESTAMP(0) DEFAULT NOW(),
 updated_at TIMESTAMP(0),

@@ -9,6 +9,6 @@ CREATE TABLE IF NOT EXISTS post (
   format format_enum DEFAULT 'unspecified',
   created_by BIGINT  REFERENCES users(user_id),
   approved_by BIGINT REFERENCES users(user_id),
-  branch_id BIGINT REFERENCES branch(branch_id)
+  branch_id BIGINT REFERENCES branch(branch_id) NULL
 
 );
