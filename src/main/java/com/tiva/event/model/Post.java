@@ -3,10 +3,12 @@ package com.tiva.event.model;
 import com.tiva.event.model.enums.EventTypeEnum;
 import com.tiva.event.model.enums.FormatEnum;
 import com.tiva.event.model.enums.StatusEnum;
+import io.hypersistence.utils.hibernate.type.basic.PostgreSQLEnumType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 
@@ -31,14 +33,20 @@ public class Post {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate = LocalDateTime.now();
 
-    @Enumerated(value = EnumType.STRING)
-    private StatusEnum status = StatusEnum.WAITING;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "status_enum")
+    @Type(PostgreSQLEnumType.class)
+    private StatusEnum status = StatusEnum.waiting;
 
-    @Enumerated(value = EnumType.STRING)
-    private EventTypeEnum event = EventTypeEnum.OTHER;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "event_type_enum")
+    @Type(PostgreSQLEnumType.class)
+    private EventTypeEnum event = EventTypeEnum.other;
 
-    @Enumerated(value = EnumType.STRING)
-    private FormatEnum format = FormatEnum.UNSPECIFIED;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "format_enum")
+    @Type(PostgreSQLEnumType.class)
+    private FormatEnum format = FormatEnum.unspecified;
 
     @ManyToOne()
     @JoinColumn(name = "created_by")
