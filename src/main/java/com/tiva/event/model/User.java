@@ -42,7 +42,7 @@ public class User {
 
     @CreatedDate
     @Column
-    private LocalDateTime creationDate;
+    private LocalDateTime createdDate;
 
     @Column
     @LastModifiedDate
@@ -57,7 +57,7 @@ public class User {
     @Column(columnDefinition = "role_enum")
     private RoleEnum role;
 
-    @OneToMany(mappedBy = "createdBy")
-    private List<Comment> commentList;
+//    @OneToMany(mappedBy = "createdBy")
+//    private List<Comment> commentList; //do not work
 
 }
