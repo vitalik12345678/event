@@ -9,12 +9,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
+@Table
 @NoArgsConstructor
 public class Post {
     @Id
@@ -25,31 +29,35 @@ public class Post {
     @Column(nullable = false)
     private String title;
 
+    @Column
     private String content;
 
     @Column(name = "creation_date")
-    private final LocalDateTime creationDate = LocalDateTime.now();
+    @CreatedDate
+    private LocalDateTime creationDate;
 
     @Column(name = "last_modified_date")
-    private LocalDateTime lastModifiedDate = LocalDateTime.now();
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "status_enum")
     @Type(PostgreSQLEnumType.class)
-    private StatusEnum status = StatusEnum.waiting;
+    private StatusEnum status;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "event_type_enum")
     @Type(PostgreSQLEnumType.class)
-    private EventTypeEnum event = EventTypeEnum.other;
+    private EventTypeEnum event;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "format_enum")
     @Type(PostgreSQLEnumType.class)
-    private FormatEnum format = FormatEnum.unspecified;
+    private FormatEnum format;
 
     @ManyToOne()
     @JoinColumn(name = "created_by")
+    @CreatedBy
     private User createdBy;
 
     @ManyToOne()
