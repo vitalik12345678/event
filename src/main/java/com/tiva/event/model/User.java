@@ -52,8 +52,8 @@ public class User {
     @LastModifiedDate
     private LocalDateTime blockedDate;
 
-    @Type(PostgreSQLEnumType.class)
     @Enumerated(EnumType.STRING)
+    @Type(PostgreSQLEnumType.class)
     @Column(columnDefinition = "role_enum")
     private RoleEnum role;
 
