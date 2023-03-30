@@ -6,11 +6,12 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public enum FormatEnum {
+public enum RoleEnum {
 
-    ONLINE ("online"),
-    OFFLINE ("offline"),
-    UNSPECIFIED ("unspecified");
+    ADMINISTRATOR ("admin"),
+    USER ("user"),
+    GUEST ( "guest");
 
     private final String value;
+
 }
