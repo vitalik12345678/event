@@ -12,6 +12,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -32,12 +33,14 @@ public class Post {
     @Column
     private String content;
 
-    @Column(name = "creation_date")
     @CreatedDate
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime creationDate;
 
-    @Column(name = "last_modified_date")
     @LastModifiedDate
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastModifiedDate;
 
     @Enumerated(EnumType.STRING)
@@ -57,7 +60,7 @@ public class Post {
 
     @ManyToOne()
     @JoinColumn(name = "created_by")
-    @CreatedBy
+//    @CreatedBy
     private User createdBy;
 
     @ManyToOne()

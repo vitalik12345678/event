@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "branch",schema = "public")
 @NoArgsConstructor
 public class Branch {
     @Id

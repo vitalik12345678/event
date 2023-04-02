@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 @Getter
 @Setter
@@ -27,6 +28,7 @@ public class GradePost {
     private User user;
 
     @Column(name = "grade_value")
+    @Range(min = 0, max = 5)
     private Short gradeValue;
 
 }

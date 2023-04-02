@@ -3,6 +3,7 @@ package com.tiva.event.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -13,16 +14,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Table(name = "comment")
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id", nullable = false)
-    @DateTimeFormat()
     private Long commentId;
 
     @Column(name = "message")
@@ -30,17 +30,20 @@ public class Comment {
 
     @CreatedDate
     @Column(name = "creation_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime creationDate;
 
     @LastModifiedDate
     @Column(name = "last_modified_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastModifiedDate;
 
     @Column(name = "deleted_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime deletedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_comment_id")
+    @JoinColumn(name = "parent_comment_id",referencedColumnName = "comment_id")
     @JsonIgnore
     private Comment parentComment;
 
