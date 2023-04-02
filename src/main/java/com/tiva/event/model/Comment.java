@@ -1,5 +1,6 @@
 package com.tiva.event.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,12 +17,11 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-
 public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id")
+    @Column(name = "comment_id", nullable = false)
     @DateTimeFormat()
     private Long commentId;
 
@@ -36,24 +36,27 @@ public class Comment {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    @Column(name = "blocked_date")
-    private LocalDateTime blockedDate;
+    @Column(name = "deleted_date")
+    private LocalDateTime deletedDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_comment_id")
+    @JsonIgnore
     private Comment parentComment;
 
     @OneToMany(mappedBy = "parentComment")
     private List<Comment> childCommentList;
 
     //@CreatedBy
-    @Fetch(FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SELECT)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by",referencedColumnName = "user_id")
+    @JoinColumn(name = "created_by", referencedColumnName = "user_id")
+    @JsonIgnore
     private User createdBy;
 
-    @Fetch(FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SELECT)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id",referencedColumnName = "post_id")
+    @JoinColumn(name = "post_id", referencedColumnName = "post_id")
+    @JsonIgnore
     private Post post;
 }
