@@ -1,5 +1,6 @@
 package com.tiva.event.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,24 +37,27 @@ public class Comment {
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
-    @Column(name = "blocked_date")
-    private LocalDateTime blockedDate;
+    @Column(name = "deleted_date")
+    private LocalDateTime deletedDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // stackOverFlow without
     @JoinColumn(name = "parent_comment_id")
+    @JsonIgnore
     private Comment parentComment;
 
     @OneToMany(mappedBy = "parentComment")
     private List<Comment> childCommentList;
 
     //@CreatedBy
-    @Fetch(FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SELECT)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by",referencedColumnName = "user_id")
+    @JsonIgnore // do not work without  for get request
     private User createdBy;
 
-    @Fetch(FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SELECT)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id",referencedColumnName = "post_id")
+    @JsonIgnore // do not work without  for get request
     private Post post;
 }
