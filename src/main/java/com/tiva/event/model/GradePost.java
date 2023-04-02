@@ -1,6 +1,5 @@
 package com.tiva.event.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,20 +11,15 @@ import org.hibernate.validator.constraints.Range;
 @Entity
 @NoArgsConstructor
 @Table(name = "grade_post")
+@IdClass(GradePostId.class)
 public class GradePost {
 
-    @EmbeddedId
-    private GradePostId id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", insertable = false, updatable = false)
-    @JsonIgnore()
-    private Post post;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    @JsonIgnore()
-    private User user;
+    @Id
+    @Column(name = "post_id", nullable = false)
+    private Long postId;
+    @Id
+    @Column(nullable = false)
+    private Long userId;
 
     @Column(name = "grade_value")
     @Range(min = 0, max = 5)
