@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum RoleEnum {
 
-    administrator ("administrator"),
+    ADMINISTRATOR ("admin"),
     USER ("user"),
     GUEST ( "guest");
 

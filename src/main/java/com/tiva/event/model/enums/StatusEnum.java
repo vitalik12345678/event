@@ -8,10 +8,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum StatusEnum {
 
-    created ("created"),
-    approved ("approved"),
-    declined ("declined"),
-    waiting ("waiting");
+    CREATED ("created"),
+    APPROVED ("approved"),
+    DECLINED ("declined"),
+    WAITING ("waiting");
 
     private final String value;
 }
