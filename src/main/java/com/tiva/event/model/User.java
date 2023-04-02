@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,39 +26,42 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column
+    @Column(nullable = false)
     private String firstName;
 
-    @Column
+    @Column(nullable = false)
     private String lastName;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private Long phone;
 
     @CreatedDate
-    @Column
-    private LocalDateTime creationDate;
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdDate;
 
-    @Column
     @LastModifiedDate
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastVisitedDate;
 
     @Column
     @LastModifiedDate
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime blockedDate;
 
     @Enumerated(EnumType.STRING)
     @Type(PostgreSQLEnumType.class)
-    @Column(columnDefinition = "role_enum")
+    @Column(nullable = false, columnDefinition = "role_enum")
     private RoleEnum role;
 
-    @OneToMany(mappedBy = "createdBy")
-    private List<Comment> commentList;
+//    @OneToMany(mappedBy = "createdBy")
+//    private List<Comment> commentList;
 
 }
