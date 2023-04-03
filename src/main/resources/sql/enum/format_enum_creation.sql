@@ -1,1 +1,1 @@
-CREATE TYPE format_enum AS ENUM ('online', 'offline', 'unspecified');
+CREATE TYPE format_enum AS ENUM ('ONLINE', 'OFFLINE', 'UNSPECIFIED');

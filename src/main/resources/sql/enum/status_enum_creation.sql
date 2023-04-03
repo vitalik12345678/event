@@ -1,1 +1,1 @@
-CREATE TYPE status_enum AS ENUM ('created', 'approved', 'declined','waiting');
+CREATE TYPE status_enum AS ENUM ('CREATED', 'APPROVED', 'DECLINED','WAITING');
