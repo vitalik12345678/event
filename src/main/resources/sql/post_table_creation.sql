@@ -5,9 +5,9 @@ CREATE TABLE IF NOT EXISTS post
     content            TEXT,
     creation_date      TIMESTAMP(0)    DEFAULT NOW(),
     last_modified_date TIMESTAMP(0)    DEFAULT NOW(),
-    status             status_enum     DEFAULT 'waiting',
-    event              event_type_enum DEFAULT 'other',
-    format             format_enum     DEFAULT 'unspecified',
+    status             status_enum     DEFAULT 'WAITING',
+    event              event_type_enum DEFAULT 'OTHER',
+    format             format_enum     DEFAULT 'UNSPECIFIED',
     created_by         BIGINT REFERENCES users (user_id),
     approved_by        BIGINT REFERENCES users (user_id),
     branch_id          BIGINT REFERENCES branch (branch_id) NULL
