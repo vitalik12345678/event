@@ -8,11 +8,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum EventTypeEnum {
 
-    CONFERENCE ("conference"),
-    WORKSHOP ("workshop"),
-    SEMINAR ("seminar"),
-    OTHER ("other"),
-    PARTY ("party");
+    CONFERENCE ("CONFERENCE"),
+    WORKSHOP ("WORKSHOP"),
+    SEMINAR ("SEMINAR"),
+    OTHER ("OTHER"),
+    PARTY ("PARTY");
 
     private final String value;
 
