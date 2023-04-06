@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXiSTS comment
+CREATE TABLE IF NOT EXISTS comment
 (
     comment_id         SERIAL PRIMARY KEY,
     message            TEXT,
