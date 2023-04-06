@@ -39,7 +39,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, unique = true)
-    private Long phone;
+    private String  phone;
 
     @CreatedDate
     @Column(nullable = false)
