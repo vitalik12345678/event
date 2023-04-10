@@ -39,7 +39,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, unique = true)
-    private String  phone;
+    private String phone;
 
     @CreatedDate
     @Column(nullable = false)
@@ -52,7 +52,6 @@ public class User {
     private LocalDateTime lastVisitedDate;
 
     @Column
-    @LastModifiedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime blockedDate;
 
