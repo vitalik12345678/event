@@ -3,22 +3,23 @@ package com.tiva.event.model;
 import com.tiva.event.model.enums.RoleEnum;
 import io.hypersistence.utils.hibernate.type.basic.PostgreSQLEnumType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity(name = "users")
-@Getter
-@Setter
+@Entity
 @Table(name = "users")
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
@@ -39,7 +40,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, unique = true)
-    private Long phone;
+    private String phone;
 
     @CreatedDate
     @Column(nullable = false)
@@ -52,7 +53,6 @@ public class User {
     private LocalDateTime lastVisitedDate;
 
     @Column
-    @LastModifiedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime blockedDate;
 

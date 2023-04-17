@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-
 @RestController
 @RequestMapping
 public class UserController {
@@ -34,9 +32,18 @@ public class UserController {
 
     @PostMapping("/user/registration")
     public ResponseEntity<User> create(@RequestBody UserDTO userDTO) {
-        userDTO.setCreatedDate(LocalDateTime.now());
         return new ResponseEntity<>(
-                userRepository.save(userMapper.UserDTOToModel(userDTO)
+                userRepository.save(userMapper.dtoToModel(userDTO)
                 ), HttpStatus.OK);
     }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable(value = "id") Long id) {
+        UserDTO userDTO = userMapper.modelToDto(userRepository.findById(id).get());
+
+        userRepository.deleteById(userDTO.getUserId());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
 }
