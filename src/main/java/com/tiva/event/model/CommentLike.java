@@ -11,28 +11,20 @@ import lombok.Setter;
 @Entity
 @Table(name = "comment_like")
 @NoArgsConstructor
-@IdClass(CommentLikeId.class)
 public class CommentLike {
 
-    @Id
-    @Column(name = "post_id", nullable = false)
-    private Long postId;
+    @EmbeddedId
+    private CommentLikeId commentLikeId;
 
-    @Id
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
-
-    @Id
-    @Column(name = "comment_id", nullable = false)
-    private Long commentId;
-
-    @MapsId("post_id")
+    @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false, updatable = false)
     @JsonIgnore
-    private Post post;
+    private User user;
 
-    @MapsId("comment_id")
+    @MapsId("commentId")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id", referencedColumnName = "comment_id", nullable = false, updatable = false)
     @JsonIgnore
     private Comment comment;
 
