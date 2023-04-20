@@ -23,7 +23,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+        return http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/user/signup").permitAll()
+                        .anyRequest().authenticated())
                 .addFilterBefore(jwtAthFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin(Customizer.withDefaults())
                 .userDetailsService(userDetailsService)

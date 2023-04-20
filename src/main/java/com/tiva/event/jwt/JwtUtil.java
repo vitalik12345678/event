@@ -26,6 +26,7 @@ public class JwtUtil {
 
     public SecretKey getSecretKey() {
         byte[] decodedKey = Base64.getDecoder().decode(secret);
+
         return Keys.hmacShaKeyFor(decodedKey);
     }
 
@@ -34,6 +35,7 @@ public class JwtUtil {
         claims.put("authorities", userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList());
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
@@ -45,6 +47,7 @@ public class JwtUtil {
 
     public boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
+
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
@@ -53,15 +56,18 @@ public class JwtUtil {
     }
 
     public Instant getExpirationDateFromToken(String token) {
+
         return getClaimFromToken(token, claims -> claims.getExpiration().toInstant());
     }
 
     private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
+
         return claimsResolver.apply(claims);
     }
 
     private Claims getAllClaimsFromToken(String token) {
+
         return Jwts.parserBuilder()
                 .setSigningKey(getSecretKey())
                 .build()
@@ -71,6 +77,7 @@ public class JwtUtil {
 
     private boolean isTokenExpired(String token) {
         final Instant expirationDate = getExpirationDateFromToken(token);
+
         return expirationDate.isBefore(Instant.now());
     }
 
