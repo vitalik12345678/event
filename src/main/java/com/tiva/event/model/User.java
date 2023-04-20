@@ -14,10 +14,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-@Data
 @Builder
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EntityListeners(AuditingEntityListener.class)
 public class User {
@@ -61,7 +62,5 @@ public class User {
     @Column(nullable = false, columnDefinition = "role_enum")
     private RoleEnum role;
 
-//    @OneToMany(mappedBy = "createdBy")
-//    private List<Comment> commentList;
 
 }
