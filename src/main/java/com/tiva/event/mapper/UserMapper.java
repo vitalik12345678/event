@@ -5,7 +5,6 @@ import com.tiva.event.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
 public interface UserMapper {
 
         User dtoToModel (UserDTO userDTO);
