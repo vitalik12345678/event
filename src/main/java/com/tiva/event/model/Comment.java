@@ -43,7 +43,7 @@ public class Comment {
     private LocalDateTime deletedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_comment_id",referencedColumnName = "comment_id")
+    @JoinColumn(name = "parent_comment_id", referencedColumnName = "comment_id")
     @JsonIgnore
     private Comment parentComment;
 

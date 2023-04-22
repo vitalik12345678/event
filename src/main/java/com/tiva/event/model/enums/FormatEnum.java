@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum FormatEnum {
 
-    ONLINE ("ONLINE"),
-    OFFLINE ("OFFLINE"),
-    UNSPECIFIED ("UNSPECIFIED");
+    ONLINE("ONLINE"),
+    OFFLINE("OFFLINE"),
+    UNSPECIFIED("UNSPECIFIED");
 
     private final String value;
 }

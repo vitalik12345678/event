@@ -8,10 +8,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-        User dtoToModel (UserDTO userDTO);
+    User dtoToModel(UserDTO userDTO);
 
-        @Mapping(source = "createdDate", target = "createdDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
-        @Mapping(source = "lastVisitedDate", target = "lastVisitedDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
-        UserDTO modelToDto (User user);
+    @Mapping(source = "createdDate", target = "createdDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Mapping(source = "lastVisitedDate", target = "lastVisitedDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    UserDTO modelToDto(User user);
 
 }
