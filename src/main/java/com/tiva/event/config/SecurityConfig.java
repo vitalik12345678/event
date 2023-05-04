@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAthFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin(Customizer.withDefaults())
                 .userDetailsService(userDetailsService)
+                .cors().disable()
                 .csrf().disable()
                 .build();
     }
