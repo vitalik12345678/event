@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum RoleEnum {
 
-    ADMINISTRATOR ("ADMINISTRATOR"),
-    USER ("USER"),
-    GUEST ( "GUEST");
+    ADMINISTRATOR("ADMINISTRATOR"),
+    USER("USER"),
+    GUEST("GUEST");
 
     private final String value;
 
