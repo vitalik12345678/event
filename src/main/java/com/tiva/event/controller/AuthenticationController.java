@@ -3,9 +3,11 @@ package com.tiva.event.controller;
 import com.tiva.event.dto.LoginDTO;
 import com.tiva.event.dto.UserDTO;
 import com.tiva.event.service.AuthenticationService;
+import com.tiva.event.service.AuthenticationServiceImpl;
 import com.tiva.event.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -21,7 +23,9 @@ import java.util.Map;
 public class AuthenticationController {
 
     private final UserService userService;
-    private final AuthenticationService authenticationService;
+    private final AuthenticationServiceImpl authenticationServiceImpl;
+    @Autowired
+    private AuthenticationService authenticationService;
 
 
     @PostMapping("/signup")
@@ -37,7 +41,7 @@ public class AuthenticationController {
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
         log.trace("authentication for user '{}'", loginDTO.phone());
 
-        String jwtToken = authenticationService.authenticateIfValid(loginDTO);
+        String jwtToken = authenticationServiceImpl.authenticateIfValid(loginDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(jwtToken);
     }
