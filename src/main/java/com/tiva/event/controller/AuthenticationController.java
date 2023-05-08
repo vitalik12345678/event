@@ -42,14 +42,5 @@ public class AuthenticationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(jwtToken);
     }
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<Map<String, Object>> handleAuthenticationException(AuthenticationException e) {
-        Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("message", "Authentication failed");
-        errorResponse.put("details", e.getMessage());
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
-    }
-
 
 }
