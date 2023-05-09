@@ -6,4 +6,6 @@ public interface EmailService {
 
     void sendPasswordResetEmail(ForgotPasswordDTO forgotPasswordDTO, String url);
 
+    void sendEmail(String to, String subject, String text);
+
 }

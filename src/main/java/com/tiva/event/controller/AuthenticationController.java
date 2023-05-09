@@ -7,6 +7,7 @@ import com.tiva.event.dto.UserDTO;
 import com.tiva.event.service.AuthenticationService;
 import com.tiva.event.service.EmailService;
 import com.tiva.event.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<UserDTO> signUp(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> signUp(@RequestBody @Valid UserDTO userDTO) {
         log.trace("signUp user '{}'", userDTO);
 
         UserDTO savedUserDTO = userService.create(userDTO);
@@ -47,7 +48,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordDTO forgotPasswordDTO) {
+    public ResponseEntity<String> forgotPassword(@RequestBody @Valid ForgotPasswordDTO forgotPasswordDTO) {
         log.trace("Forgot password for user with email '{}'", forgotPasswordDTO.email());
 
         String url = authenticationService.generatePasswordResetURL(forgotPasswordDTO.email());
@@ -57,7 +58,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) {
+    public ResponseEntity<String> resetPassword(@RequestBody @Valid ResetPasswordDTO resetPasswordDTO) {
         log.trace("Resetting password for user with token '{}'", resetPasswordDTO.token());
 
         authenticationService.resetPassword(resetPasswordDTO);
