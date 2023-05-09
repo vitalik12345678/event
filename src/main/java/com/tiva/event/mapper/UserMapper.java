@@ -2,7 +2,6 @@ package com.tiva.event.mapper;
 
 import com.tiva.event.dto.UserDTO;
 import com.tiva.event.model.User;
-import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 public interface UserMapper {
