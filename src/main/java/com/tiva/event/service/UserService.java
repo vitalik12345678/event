@@ -1,7 +1,7 @@
 package com.tiva.event.service;
 
 import com.tiva.event.dto.UserDTO;
-import com.tiva.event.mapper.UserMapper;
+import com.tiva.event.mapper.EntityMapper;
 import com.tiva.event.model.User;
 import com.tiva.event.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,19 +13,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserMapper userMapper;
+    private final EntityMapper entityMapper;
     private final UserRepository userRepository;
 
     public UserDTO create(UserDTO userDTO) {
-        User user = userMapper.dtoToModel(userDTO);
+        User user = entityMapper.dtoToModel(userDTO);
         user.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
         user = userRepository.save(user);
 
-        return userMapper.modelToDto(user);
+        return entityMapper.modelToDto(user);
     }
 
     public void delete(Long id) {
-        UserDTO userDTO = userMapper.modelToDto(userRepository.findById(id).orElseThrow());
+        UserDTO userDTO = entityMapper.modelToDto(userRepository.findById(id).orElseThrow());
         userRepository.deleteById(userDTO.getUserId());
     }
 
