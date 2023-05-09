@@ -30,7 +30,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/signup", "/api/auth/login",
+                                "/swagger-ui.html", "/swagger-ui/**", "/v3/**")
+                        .permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAthFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(userDetailsService)

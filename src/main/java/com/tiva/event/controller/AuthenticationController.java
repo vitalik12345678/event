@@ -6,10 +6,13 @@ import com.tiva.event.dto.ResetPasswordDTO;
 import com.tiva.event.dto.UserDTO;
 import com.tiva.event.service.AuthenticationService;
 import com.tiva.event.service.EmailService;
+import com.tiva.event.service.AuthenticationServiceImpl;
 import com.tiva.event.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -66,14 +69,6 @@ public class AuthenticationController {
         return ResponseEntity.status(HttpStatus.OK).body("Password has been reset.");
     }
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<Map<String, Object>> handleAuthenticationException(AuthenticationException e) {
-        Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("message", "Authentication failed");
-        errorResponse.put("details", e.getMessage());
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
-    }
 
 
 }
