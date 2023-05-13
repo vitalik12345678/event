@@ -1,31 +1,34 @@
 package com.tiva.event.service;
 
 import com.tiva.event.dto.UserDTO;
-import com.tiva.event.mapper.UserMapper;
+import com.tiva.event.mapper.EntityMapper;
 import com.tiva.event.model.User;
 import com.tiva.event.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
+    private final EntityMapper entityMapper;
     private final UserRepository userRepository;
+    private final EntityMapper entityMapper;
 
     public UserDTO create(UserDTO userDTO) {
-        User user = userMapper.dtoToModel(userDTO);
-        user.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+        User user = entityMapper.dtoToModel(userDTO);
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user = userRepository.save(user);
 
-        return userMapper.modelToDto(user);
+        return entityMapper.modelToDto(user);
     }
 
     public void delete(Long id) {
-        UserDTO userDTO = userMapper.modelToDto(userRepository.findById(id).orElseThrow());
+        UserDTO userDTO = entityMapper.modelToDto(userRepository.findById(id).orElseThrow());
         userRepository.deleteById(userDTO.getUserId());
     }
 
@@ -35,4 +38,14 @@ public class UserService {
     }
 
 
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Do not found user with email" + email));
+    }
+
+    public void updatePassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        userRepository.save(user);
+    }
 }
